@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+.btn-primary {
+  @apply bg-gradient-to-tr from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition duration-300 cursor-pointer shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+
+.btn-secondary {
+  @apply bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500;
+}
+.logo {
+  @apply text-2xl font-extrabold bg-gradient-to-tr from-blue-500 to-purple-500 text-transparent bg-clip-text hover:from-blue-600 hover:to-purple-600 transition duration-300;
+}
+/* Глобальний стиль для слайдера */
+.slider-gradient .MuiSlider-thumb {
+  background: linear-gradient(to top right, #3b82f6, #9333ea);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+}
+
+.slider-gradient .MuiSlider-track {
+  background: linear-gradient(to top right, #3b82f6, #9333ea);
+}
+
+.slider-gradient .MuiSlider-rail {
+  background-color: #e0e0e0;
+}
+
+.gradient-navbar {
+  font-weight: bold;
+  background: linear-gradient(to right, #3b82f6, #a855f7);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Глобальний стиль для кнопки */
+.btn-primary {
+  background-color: linear-gradient(to top right, #3b82f6, #9333ea);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(to top right, #2563eb, #9333ea);
+}
