@@ -26,18 +26,19 @@ export const checkUser = async () => {
   }
 
   // If not in database, create new user
-
-  const newUser = await db.user.create({
-    data: {
-      clerkUserId: user.id,
-
-      name: `${user.firstName} ${user.lastName}`,
-
-      imageUrl: user.imageUrl,
-
-      email: user.emailAddresses[0].emailAddress,
-    },
-  });
-
-  return newUser;
+  try {
+    const newUser = await db.user.create({
+      data: {
+        clerkUserId: user.id,
+        name: `${user.firstName} ${user.lastName}`,
+        imageUrl: user.imageUrl,
+        email: user.emailAddresses[0].emailAddress,
+      },
+    });
+    console.log("New user created:", newUser);
+    return newUser;
+  } catch (error) {
+    console.error("Error creating user:", error);
+    throw error;
+  }
 };
