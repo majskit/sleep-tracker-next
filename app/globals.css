@@ -1,10 +1,6 @@
-/* @import "tailwindcss/base";
+@import "tailwindcss/preflight";
 @import "tailwindcss/components";
-@import "tailwindcss/utilities"; */
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/utilities";
 
 html {
   scroll-behavior: smooth;
@@ -28,17 +24,15 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-.btn-primary {
-  @apply bg-gradient-to-tr from-blue-500 to-purple-500 text-white px-6 py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition duration-300 cursor-pointer shadow-md hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500;
+.logo:hover {
+  background: linear-gradient(to top right, #2563eb, #9333ea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  box-shadow: 0 1px 4px rgba(31, 41, 55, 0.08);
+  outline: none;
 }
 
-.btn-secondary {
-  @apply bg-gray-300 text-gray-800 px-6 py-3 rounded-lg hover:bg-gray-400 transition duration-300 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500;
-}
-.logo {
-  @apply text-2xl font-extrabold bg-gradient-to-tr from-blue-500 to-purple-500 text-transparent bg-clip-text hover:from-blue-600 hover:to-purple-600 transition duration-300;
-}
-/* Глобальний стиль для слайдера */
+/* Global style for slider */
 .slider-gradient .MuiSlider-thumb {
   background: linear-gradient(to top right, #3b82f6, #9333ea);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
@@ -60,14 +54,14 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
-/* Глобальний стиль для кнопки */
+/* Global style for button */
 .btn-primary {
-  background-color: linear-gradient(to top right, #3b82f6, #9333ea);
+  background: linear-gradient(to top right, #3b82f6, #9333ea);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: background-color 0.3s ease-in-out;
+  transition: background 0.3s ease-in-out;
 }
 
 .btn-primary:disabled {
