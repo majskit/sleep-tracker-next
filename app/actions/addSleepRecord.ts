@@ -1,7 +1,7 @@
-"use server";
-import { auth } from "@clerk/nextjs/server";
-import { db } from "@/lib/db";
-import { revalidatePath } from "next/cache";
+'use server';
+import { auth } from '@clerk/nextjs/server';
+import { db } from '@/lib/db';
+import { revalidatePath } from 'next/cache';
 
 interface RecordData {
   text: string;
@@ -15,19 +15,19 @@ interface RecordResult {
 }
 
 async function addSleepRecord(formData: FormData): Promise<RecordResult> {
-  const textValue = formData.get("text");
-  const amountValue = formData.get("amount");
-  const dateValue = formData.get("date"); // Extract date from formData
+  const textValue = formData.get('text');
+  const amountValue = formData.get('amount');
+  const dateValue = formData.get('date'); // Extract date from formData
 
   // Check for input values
   if (
     !textValue ||
-    textValue === "" ||
+    textValue === '' ||
     !amountValue ||
     !dateValue ||
-    dateValue === ""
+    dateValue === ''
   ) {
-    return { error: "Text, amount, or date is missing" };
+    return { error: 'Text, amount, or date is missing' };
   }
 
   const text: string = textValue.toString(); // Ensure text is a string
@@ -37,8 +37,8 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
   try {
     date = new Date(dateValue.toString()).toISOString(); // Convert to ISO-8601 format
   } catch (error) {
-    console.error("Invalid date format:", error); // Log the error
-    return { error: "Invalid date format" };
+    console.error('Invalid date format:', error); // Log the error
+    return { error: 'Invalid date format' };
   }
 
   // Get logged in user
@@ -46,7 +46,7 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
 
   // Check for user
   if (!userId) {
-    return { error: "User not found" };
+    return { error: 'User not found' };
   }
 
   try {
@@ -54,7 +54,7 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
     const existingRecord = await db.record.findFirst({
       where: {
         userId,
-        date: date,
+        date: date, // Match the date
       },
     });
 
@@ -81,7 +81,7 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
         data: {
           text,
           amount,
-          date,
+          date, // Save the date to the database
           userId,
         },
       });
@@ -93,13 +93,13 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
       };
     }
 
-    revalidatePath("/");
+    revalidatePath('/');
 
     return { data: recordData };
   } catch (error) {
-    console.error("Error adding sleep record:", error);
+    console.error('Error adding sleep record:', error); // Log the error
     return {
-      error: "An unexpected error occurred while adding the sleep record.",
+      error: 'An unexpected error occurred while adding the sleep record.',
     };
   }
 }

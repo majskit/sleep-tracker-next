@@ -1,7 +1,7 @@
 import { SignInButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs";
 
 import Link from "next/link";
-import { AppBar, Toolbar, Button, Box } from "@mui/material";
+import { AppBar, Toolbar, Box } from "@mui/material";
 
 export default function Navbar() {
   return (
@@ -20,18 +20,16 @@ export default function Navbar() {
         {/* Navigation Links */}
         <Box sx={{ display: "flex", gap: 2 }}>
           <SignedIn>
-            <Button component={Link} href="/" className="gradient-navbar">
+            <Link href="/" className="gradient-navbar">
               Dashboard
-            </Button>
+            </Link>
 
             <UserButton />
           </SignedIn>
 
           <SignedOut>
             <SignInButton mode="modal">
-              <Button variant="contained" className="btn-primary">
-                Sign In
-              </Button>
+              <button className="btn-primary">Sign In</button>
             </SignInButton>
           </SignedOut>
         </Box>
