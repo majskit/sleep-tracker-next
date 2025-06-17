@@ -1,7 +1,8 @@
 "use client";
 
-import { Container, Box, Typography, Button, Paper } from "@mui/material";
+import { Container, Box, Typography, Paper } from "@mui/material";
 import { SignInButton } from "@clerk/nextjs";
+import React from "react";
 
 export default function Guest() {
   return (
@@ -53,9 +54,7 @@ export default function Guest() {
                 }}
               >
                 <SignInButton>
-                  <Button variant="contained" className="btn-primary">
-                    Get Started
-                  </Button>
+                  <button className="btn-primary">Get Started</button>
                 </SignInButton>
               </Box>
             </Box>
@@ -167,9 +166,7 @@ export default function Guest() {
           </Typography>
           <Box sx={{ display: "flex", justifyContent: "center" }}>
             <SignInButton>
-              <Button className="btn-primary" variant="contained">
-                Get Started
-              </Button>
+              <button className="btn-primary">Get Started</button>
             </SignInButton>
           </Box>
         </Container>

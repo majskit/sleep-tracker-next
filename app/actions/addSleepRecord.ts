@@ -1,5 +1,4 @@
 "use server";
-
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/db";
 import { revalidatePath } from "next/cache";
@@ -18,8 +17,9 @@ interface RecordResult {
 async function addSleepRecord(formData: FormData): Promise<RecordResult> {
   const textValue = formData.get("text");
   const amountValue = formData.get("amount");
-  const dateValue = formData.get("date");
+  const dateValue = formData.get("date"); // Extract date from formData
 
+  // Check for input values
   if (
     !textValue ||
     textValue === "" ||
@@ -30,23 +30,27 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
     return { error: "Text, amount, or date is missing" };
   }
 
-  const text: string = textValue.toString();
-  const amount: number = parseFloat(amountValue.toString());
+  const text: string = textValue.toString(); // Ensure text is a string
+  const amount: number = parseFloat(amountValue.toString()); // Parse amount as number
+  // Convert date to ISO-8601 format
   let date: string;
   try {
-    date = new Date(dateValue.toString()).toISOString();
+    date = new Date(dateValue.toString()).toISOString(); // Convert to ISO-8601 format
   } catch (error) {
-    console.error("Invalid date format:", error);
+    console.error("Invalid date format:", error); // Log the error
     return { error: "Invalid date format" };
   }
 
+  // Get logged in user
   const { userId } = await auth();
 
+  // Check for user
   if (!userId) {
     return { error: "User not found" };
   }
 
   try {
+    // Check if a record with the same date already exists
     const existingRecord = await db.record.findFirst({
       where: {
         userId,
@@ -57,6 +61,7 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
     let recordData: RecordData;
 
     if (existingRecord) {
+      // Update the existing record
       const updatedRecord = await db.record.update({
         where: { id: existingRecord.id },
         data: {
@@ -71,6 +76,7 @@ async function addSleepRecord(formData: FormData): Promise<RecordResult> {
         date: updatedRecord.date?.toISOString() || date,
       };
     } else {
+      // Create a new record
       const createdRecord = await db.record.create({
         data: {
           text,
